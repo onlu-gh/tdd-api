@@ -9,7 +9,7 @@ jobs:
     steps:
       - checkout
       - run:
-          command: ./testCode.py TestCode
+          command: ./test_Code.py TestCode
           name: Test
 
 workflows:
