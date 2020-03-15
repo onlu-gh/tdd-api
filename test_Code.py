@@ -22,7 +22,7 @@ class TestCode(unittest.TestCase):
         self.assertEqual(Code.get_characters('a'), 'error')
 
     def test_get_multiple_character(self):
-        char_list=Code.get_characters([1, 2, 4, 6])
+        char_list = Code.get_characters([1, 2, 4, 6])
         self.assertEqual(len(char_list), 4)
         self.assertEqual(char_list[0][0], '1')
         self.assertEqual(char_list[1][0], '2')
