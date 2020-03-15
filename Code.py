@@ -14,10 +14,17 @@ def get_characters(spec=-1):
 
     r = requests.get(url)
     forms = json.loads(r.content.decode())
+
+    if type(spec) != int and type(spec) != list:
+        return 'error'
+    if type(forms) == dict and 'error' in forms:
+        return 'error'
+
     if type(spec) == int and spec == -1:
         forms = forms['results']
     elif type(spec) == int and spec != -1:
         forms = [forms]
+
     all_forms = []
     curr_form = []
 
