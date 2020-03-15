@@ -37,4 +37,3 @@ def get_characters(spec=-1):
         all_forms.append(curr_form)
         curr_form = []
     return all_forms
-
