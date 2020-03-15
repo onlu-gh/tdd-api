@@ -2,8 +2,9 @@ import requests
 import json
 
 """
-Feature #1
+# Feature #1
 """
+
 
 def get_all_characters():
     url = 'https://rickandmortyapi.com/api/character/'
@@ -27,7 +28,7 @@ def get_all_characters():
         all_forms.append(curr_form)
         curr_form = []
     return all_forms
-    #print(all_forms)
+    # print(all_forms)
 
 
 get_all_characters()
