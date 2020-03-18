@@ -25,7 +25,8 @@ def get_characters(spec=-1):
     if type(forms) == dict and 'error' in forms:
         return 'error'
 
-    if (type(spec) == int and spec == -1) or (type(spec) == list and len(spec) != 0 and spec[0] == '?'):
+    if (type(spec) == int and spec == -1) or \
+            (type(spec) == list and len(spec) != 0 and spec[0] == '?'):
         forms = forms['results']
     elif type(spec) == int and spec != -1:
         forms = [forms]
