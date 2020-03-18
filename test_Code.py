@@ -32,5 +32,10 @@ class TestCode(unittest.TestCase):
         self.assertEqual(Code.get_characters([]), 'error')
         self.assertRaises(TypeError, Code.get_characters(), ['a'])
 
+    def test_get_characters_single_filter(self):
+        char_list = Code.get_characters(['?', 'species=Human'])
+        for char in char_list:
+            self.assertIn('human', str.lower(char[3]))
+
     if __name__ == '__main__':
         unittest.main()

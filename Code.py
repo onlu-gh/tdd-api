@@ -9,18 +9,23 @@ import json
 def get_characters(spec=-1):
     url = 'https://rickandmortyapi.com/api/character/'
 
-    if (type(spec) == int and spec != -1) or type(spec) == list:
-        url += str(spec).replace(' ', '')
+    if spec != -1:
+        if (type(spec) == int and spec != -1) or (type(spec) == list and len(spec) != 0 and
+                                                  type(spec[0]) == int):
+            url += str(spec).replace(' ', '') + '/'
+        elif type(spec) == list and len(spec) != 0 and spec[0] == '?':
+            url += '?' + spec[1]
+            for f in spec[2:]:
+                url += '&' + f
+        else:
+            return 'error'
 
     r = requests.get(url)
     forms = json.loads(r.content.decode())
-
-    if type(spec) != int and type(spec) != list:
-        return 'error'
     if type(forms) == dict and 'error' in forms:
         return 'error'
 
-    if type(spec) == int and spec == -1:
+    if (type(spec) == int and spec == -1) or (type(spec) == list and len(spec) != 0 and spec[0] == '?'):
         forms = forms['results']
     elif type(spec) == int and spec != -1:
         forms = [forms]
