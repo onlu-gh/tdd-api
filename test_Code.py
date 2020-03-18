@@ -129,7 +129,8 @@ class TestCode(unittest.TestCase):
         ep_list = Code.get_episodes(['?', 'name=Rick',
                                      'episode=S03'])
         for ep in ep_list:
-            self.assertTrue('S01' in str.upper(ep[3]) or 'S03' in str.upper(ep[3]))
+            self.assertTrue('S01' in str.upper(ep[3]) or
+                            'S03' in str.upper(ep[3]))
 
     if __name__ == '__main__':
         unittest.main()
