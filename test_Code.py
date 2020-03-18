@@ -1,18 +1,32 @@
-import unittest
 import Code
+import unittest
+import json
+from unittest.mock import patch, MagicMock
 
 
 # from unittest import mock
-# from unittest.mock import patch, MagicMock
 
 
 class TestCode(unittest.TestCase):
+
     """
     # Feature #1
     """
     def test_get_all_characters(self):
         self.assertEqual(str(len(Code.get_characters())),
                          Code.get_characters()[-1][0])
+        with patch('Code.requests.get') as mocked_get:
+            mocked_get.return_value.content = '{"results":' \
+                                              '[{"id":1,"name":' \
+                                              '"Rick Sanchez",' \
+                                              '"status":"Alive",' \
+                                              '"species":"Human",' \
+                                              '"type":"","gender":' \
+                                              '"Male"}]}'.encode()
+            test = Code.get_characters()
+            mocked_get.assert_called_with('https://rickandmortyapi.'
+                                          'com/api/character/')
+            self.assertEqual(test, [['1', 'Rick Sanchez', 'Alive', 'Human', 'Male']])
 
     def test_get_single_character(self):
         self.assertEqual(len(Code.get_characters(5)), 1)
