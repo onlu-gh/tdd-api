@@ -7,7 +7,9 @@ import Code
 
 
 class TestCode(unittest.TestCase):
-
+    """
+    # Feature #1
+    """
     def test_get_all_characters(self):
         self.assertEqual(str(len(Code.get_characters())),
                          Code.get_characters()[-1][0])
@@ -36,6 +38,13 @@ class TestCode(unittest.TestCase):
         char_list = Code.get_characters(['?', 'species=Human'])
         for char in char_list:
             self.assertIn('human', str.lower(char[3]))
+
+    def test_get_characters_multi_filter(self):
+        char_list = Code.get_characters(['?', 'species=Alien', 'status=Alive', 'gender=Unknown'])
+        for char in char_list:
+            self.assertIn('alien', str.lower(char[3]))
+            self.assertIn('alive', str.lower(char[2]))
+            self.assertIn('unknown', str.lower(char[4]))
 
     if __name__ == '__main__':
         unittest.main()
