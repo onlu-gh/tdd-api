@@ -69,5 +69,25 @@ class TestCode(unittest.TestCase):
             self.assertIn('alive', str.lower(char[2]))
             self.assertIn('unknown', str.lower(char[4]))
 
+    """
+    # Feature #2
+    """
+
+    def test_get_all_episodes(self):
+        self.assertEqual(str(len(Code.get_episodes())),
+                         Code.get_episodes()[-1][0])
+        with patch('Code.requests.get') as mocked_get:
+            mocked_get.return_value.content = '{"results":' \
+                                              '[{"id":1,"name":' \
+                                              '"Pilot",' \
+                                              '"air_date":' \
+                                              '"December 2, 2013",' \
+                                              '"episode":"S01E01"' \
+                                              '}]}'.encode()
+            test = Code.get_episodes()
+            mocked_get.assert_called_with('https://rickandmortyapi.'
+                                          'com/api/episode/')
+            self.assertEqual(test, [['1', 'Pilot', 'December 2, 2013',
+                                     'S01E01']])
     if __name__ == '__main__':
         unittest.main()
