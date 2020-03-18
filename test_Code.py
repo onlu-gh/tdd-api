@@ -120,7 +120,7 @@ class TestCode(unittest.TestCase):
         self.assertFalse(mocked_parameter.called)
         self.assertEqual(ret_val, 'error')
 
-    def test_get_characters_single_filter(self):
+    def test_get_episodes_single_filter(self):
         ep_list = Code.get_episodes(['?', 'episode=S02'])
         for ep in ep_list:
             self.assertIn('S02', str.upper(ep[3]))
