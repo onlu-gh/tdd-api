@@ -40,7 +40,9 @@ class TestCode(unittest.TestCase):
             self.assertIn('human', str.lower(char[3]))
 
     def test_get_characters_multi_filter(self):
-        char_list = Code.get_characters(['?', 'species=Alien', 'status=Alive', 'gender=Unknown'])
+        char_list = Code.get_characters(['?', 'species=Alien',
+                                         'status=Alive',
+                                         'gender=Unknown'])
         for char in char_list:
             self.assertIn('alien', str.lower(char[3]))
             self.assertIn('alive', str.lower(char[2]))
