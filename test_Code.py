@@ -7,6 +7,7 @@ class TestCode(unittest.TestCase):
     """
     # Feature #1
     """
+
     def test_get_all_characters(self):
         self.assertEqual(str(len(Code.get_characters())),
                          Code.get_characters()[-1][0])

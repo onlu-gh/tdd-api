@@ -5,6 +5,7 @@ import json
 # Feature #1
 """
 
+
 def get_characters(spec=-1):
     url = 'https://rickandmortyapi.com/api/character/'
 
