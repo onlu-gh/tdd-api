@@ -1,16 +1,13 @@
 import Code
 import unittest
-from unittest.mock import patch, MagicMock
-
-
-# from unittest import mock
+from unittest.mock import patch, Mock, MagicMock
 
 
 class TestCode(unittest.TestCase):
-
     """
     # Feature #1
     """
+
     def test_get_all_characters(self):
         self.assertEqual(str(len(Code.get_characters())),
                          Code.get_characters()[-1][0])
@@ -37,6 +34,11 @@ class TestCode(unittest.TestCase):
 
         self.assertEqual(Code.get_characters('a'), 'error')
 
+        mocked_parameter = MagicMock()
+        ret_val = Code.get_characters(mocked_parameter)
+        self.assertEqual(dir(mocked_parameter)[0], '__ne__')
+        self.assertEqual(ret_val, 'error')
+
     def test_get_multiple_character(self):
         char_list = Code.get_characters([1, 2, 4, 6])
         self.assertEqual(len(char_list), 4)
@@ -47,6 +49,11 @@ class TestCode(unittest.TestCase):
 
         self.assertEqual(Code.get_characters([]), 'error')
         self.assertRaises(TypeError, Code.get_characters(), ['a'])
+
+        mocked_parameter = Mock()
+        ret_val = Code.get_characters(mocked_parameter)
+        self.assertFalse(mocked_parameter.called)
+        self.assertEqual(ret_val, 'error')
 
     def test_get_characters_single_filter(self):
         char_list = Code.get_characters(['?', 'species=Human'])
