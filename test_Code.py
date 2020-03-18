@@ -1,6 +1,5 @@
 import Code
 import unittest
-import json
 from unittest.mock import patch, MagicMock
 
 
@@ -26,7 +25,8 @@ class TestCode(unittest.TestCase):
             test = Code.get_characters()
             mocked_get.assert_called_with('https://rickandmortyapi.'
                                           'com/api/character/')
-            self.assertEqual(test, [['1', 'Rick Sanchez', 'Alive', 'Human', 'Male']])
+            self.assertEqual(test, [['1', 'Rick Sanchez', 'Alive',
+                                     'Human', 'Male']])
 
     def test_get_single_character(self):
         self.assertEqual(len(Code.get_characters(5)), 1)
