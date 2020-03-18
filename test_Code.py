@@ -125,5 +125,11 @@ class TestCode(unittest.TestCase):
         for ep in ep_list:
             self.assertIn('S02', str.upper(ep[3]))
 
+    def test_get_episodes_multi_filter(self):
+        ep_list = Code.get_episodes(['?', 'name=Rick',
+                                     'episode=S03'])
+        for ep in ep_list:
+            self.assertTrue('S01' in str.upper(ep[3]) or 'S03' in str.upper(ep[3]))
+
     if __name__ == '__main__':
         unittest.main()
