@@ -89,5 +89,20 @@ class TestCode(unittest.TestCase):
                                           'com/api/episode/')
             self.assertEqual(test, [['1', 'Pilot', 'December 2, 2013',
                                      'S01E01']])
+
+    def test_get_single_episode(self):
+        self.assertEqual(len(Code.get_episodes(9)), 1)
+        self.assertEqual(Code.get_episodes(9)[0][0], '9')
+
+        self.assertEqual(Code.get_episodes(200000), 'error')
+        self.assertEqual(Code.get_episodes(-25), 'error')
+
+        self.assertEqual(Code.get_episodes('b'), 'error')
+
+        mocked_parameter = MagicMock()
+        ret_val = Code.get_episodes(mocked_parameter)
+        self.assertEqual(dir(mocked_parameter)[0], '__ne__')
+        self.assertEqual(ret_val, 'error')
+
     if __name__ == '__main__':
         unittest.main()
