@@ -105,12 +105,12 @@ class TestCode(unittest.TestCase):
         self.assertEqual(ret_val, 'error')
 
     def test_get_multiple_episodes(self):
-        epis_list = Code.get_episodes([8, 10, 15, 16])
-        self.assertEqual(len(epis_list), 4)
-        self.assertEqual(epis_list[0][0], '8')
-        self.assertEqual(epis_list[1][0], '10')
-        self.assertEqual(epis_list[2][0], '15')
-        self.assertEqual(epis_list[3][0], '16')
+        ep_list = Code.get_episodes([8, 10, 15, 16])
+        self.assertEqual(len(ep_list), 4)
+        self.assertEqual(ep_list[0][0], '8')
+        self.assertEqual(ep_list[1][0], '10')
+        self.assertEqual(ep_list[2][0], '15')
+        self.assertEqual(ep_list[3][0], '16')
 
         self.assertEqual(Code.get_episodes([]), 'error')
         self.assertRaises(TypeError, Code.get_episodes(), ['b'])
@@ -119,6 +119,11 @@ class TestCode(unittest.TestCase):
         ret_val = Code.get_episodes(mocked_parameter)
         self.assertFalse(mocked_parameter.called)
         self.assertEqual(ret_val, 'error')
+
+    def test_get_characters_single_filter(self):
+        ep_list = Code.get_episodes(['?', 'episode=S02'])
+        for ep in ep_list:
+            self.assertIn('S02', str.upper(ep[3]))
 
     if __name__ == '__main__':
         unittest.main()
